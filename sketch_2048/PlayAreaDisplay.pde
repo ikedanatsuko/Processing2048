@@ -1,9 +1,10 @@
 class PlayAreaDisplay {
-  MoveMethod[][] moves = new MoveMethod[TILE_SIZE][TILE_SIZE];
+  // MoveMethod[][] moves = new MoveMethod[TILE_SIZE][TILE_SIZE];
 
   PlayAreaDisplay() {
   }
 
+  // Draw static tiles
   void draw_tiles(int[][] tiles) {
     PImage img;
     imageMode(CENTER);
@@ -16,6 +17,7 @@ class PlayAreaDisplay {
     }
   }
 
+  // Draw the base of the play area
   void draw_bg() {
     background(0);
     stroke(-1);
@@ -29,6 +31,4 @@ class PlayAreaDisplay {
       line(0, pos, width, pos);
     }
   }
-
-  // Get MoveMethod and create animation
 }

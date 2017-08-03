@@ -24,19 +24,28 @@ class PlayArea {
     playAreaDisplay.draw_tiles(tileManager.tiles);
   }
 
-  void move(Direction dir) {
+  // Change tile position
+  void move(Direction dir, MoveAnimation moveAnimation) {
     switch (dir) {
     case mUP:
+      int[][] previousTiles = tileManager.getTiles();
       tileManager.move_tiles_u();
+      // phase = Phase.pMove;
       break;
     case mDOWN:
+      int[][] previousTiles = tileManager.getTiles();
       tileManager.move_tiles_d();
+      // phase = Phase.pMove;
       break;
     case mRIGHT:
+      int[][] previousTiles = tileManager.getTiles();
       tileManager.move_tiles_r();
+      // phase = Phase.pMove;
       break;
     case mLEFT:
+      int[][] previousTiles = tileManager.getTiles();
       tileManager.move_tiles_l();
+      // phase = Phase.pMove;
       break;
     }
   }

@@ -1,13 +1,18 @@
 // Control tiles
 class TileManager {
+  // MoveParam[] moves = {};
   int[][] tiles;
-  int tileSize;
+  int tileSize
 
   TileManager(int tileSize) {
     this.tileSize = tileSize;
     tiles = new int[tileSize][tileSize];
   }
-  
+
+  int[][] getTiles() {
+    return tiles;
+  }
+
   void init_tiles() {
     int[][] tiles = new int[tileSize][tileSize];
     for (int y = 0; y < tileSize; y++) {
@@ -19,7 +24,7 @@ class TileManager {
   }
 
   void set_new_tile(int[][] tiles) {
-    ArrayList<PVector> emptyTiles = new ArrayList<PVector>(); 
+    ArrayList<PVector> emptyTiles = new ArrayList<PVector>();
     for (int y = 0; y < tileSize; y++) {
       for (int x = 0; x < tileSize; x++) {
         if (tiles[x][y] == 0) {
@@ -31,10 +36,11 @@ class TileManager {
     tiles[int(newTilePos.x)][int(newTilePos.y)] = 1;
   }
 
-  // ----------------------------------------- move tiles
+  // ------------------------------------ Move tiles and return moves
   // Up
-  void move_tiles_u() { // MoveMethodも返すようにする
+  void move_tiles_u() { // movesも返すようにする
     int currentLevel, currentPos;
+
     for (int x = 0; x < tileSize; x++) {
       currentLevel = 0;
       currentPos = 0;
@@ -43,15 +49,16 @@ class TileManager {
       while (y < tileSize) {
 
         if (tiles[x][y] != 0) {
-          // その列で初めてタイルが現れた場合
+          // When a tile appears in the line for the first time
           if (currentLevel == 0) {
             currentLevel = tiles[x][y];
             if (currentPos != y) {
+
               tiles[x][currentPos] = tiles[x][y];
               tiles[x][y] = 0;
             }
           }
-          // 最後に観測したタイルと違うタイルが現れた場合
+          // When a tile unlike the tile which observed appears recently
           else if (currentLevel != tiles[x][y]) {
             currentLevel = tiles[x][y];
             currentPos++;
@@ -60,7 +67,7 @@ class TileManager {
               tiles[x][y] = 0;
             }
           } else {
-            // 最後に観測したタイルと同じタイルが現れた場合
+            // When a tile same as the tile which observed appears recently
             tiles[x][currentPos] = currentLevel + 1;
             tiles[x][y] = 0;
             currentPos++;
