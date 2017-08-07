@@ -2,7 +2,6 @@
 class TileManager {
   int[][] tiles;
   int tileSize;
-  // MoveParam[][] moves;
   ArrayList<MoveParam> moves = new ArrayList();
 
   TileManager(int tileSize) {
@@ -64,7 +63,6 @@ class TileManager {
             currentLevel = tiles[x][y];
             recentPos++;
             if (recentPos != y) {
-              // moves.add(new MoveParam(0, y - recentPos, false));
               moves.add(new MoveParam(x, y, x, recentPos, tiles[x][y]));
               tiles[x][recentPos] = tiles[x][y];
               tiles[x][y] = 0;
