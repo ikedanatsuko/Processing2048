@@ -28,7 +28,6 @@ void setup() {
   boxWidth = width / TILE_SIZE;
   boxHeight = height / TILE_SIZE;
   playArea = new PlayArea(TILE_SIZE, width, height);
-  // playArea.init();
 }
 
 void draw() {

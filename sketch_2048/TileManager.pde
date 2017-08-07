@@ -52,7 +52,6 @@ class TileManager {
           if (currentLevel == 0) {
             currentLevel = tiles[x][y];
             if (recentPos != y) {
-              // moves.add(new MoveParam(0, y - recentPos, false));
               moves.add(new MoveParam(x, y, x, recentPos, tiles[x][y]));
               tiles[x][recentPos] = tiles[x][y];
               tiles[x][y] = 0;
@@ -74,7 +73,6 @@ class TileManager {
             }
           } else {
             // When a tile same as the tile which observed appears recently
-            // moves.add(new MoveParam(0, y - recentPos, true));
             moves.add(new MoveParam(x, y, x, recentPos, tiles[x][y]));
             tiles[x][recentPos] = currentLevel + 1;
             tiles[x][y] = 0;
@@ -105,7 +103,6 @@ class TileManager {
           if (currentLevel == 0) {
             currentLevel = tiles[x][y];
             if (recentPos != y) {
-              // moves.add(new MoveParam(0, y - recentPos, false));
               moves.add(new MoveParam(x, y, x, recentPos, tiles[x][y]));
               tiles[x][recentPos] = tiles[x][y];
               tiles[x][y] = 0;
@@ -116,7 +113,6 @@ class TileManager {
             currentLevel = tiles[x][y];
             recentPos--;
             if (recentPos != y) {
-              // moves.add(new MoveParam(0, y - recentPos, false));
               moves.add(new MoveParam(x, y, x, recentPos, tiles[x][y]));
               tiles[x][recentPos] = tiles[x][y];
               tiles[x][y] = 0;
@@ -124,7 +120,6 @@ class TileManager {
               moves.add(new MoveParam(x, y, x, y, tiles[x][y]));
             }
           } else {
-            // moves.add(new MoveParam(0, y - recentPos, true));
             moves.add(new MoveParam(x, y, x, recentPos, tiles[x][y]));
             tiles[x][recentPos] = currentLevel + 1;
             tiles[x][y] = 0;
@@ -156,7 +151,6 @@ class TileManager {
           if (currentLevel == 0) {
             currentLevel = tiles[x][y];
             if (recentPos != x) {
-              // moves.add(new MoveParam(x - recentPos, y, false));
               moves.add(new MoveParam(x, y, recentPos, y, tiles[x][y]));
               tiles[recentPos][y] = tiles[x][y];
               tiles[x][y] = 0;
@@ -167,7 +161,6 @@ class TileManager {
             currentLevel = tiles[x][y];
             recentPos--;
             if (recentPos != x) {
-              // moves.add(new MoveParam(x - recentPos, y, false));
               moves.add(new MoveParam(x, y, recentPos, y, tiles[x][y]));
               tiles[recentPos][y] = tiles[x][y];
               tiles[x][y] = 0;
@@ -175,7 +168,6 @@ class TileManager {
               moves.add(new MoveParam(x, y, x, y, tiles[x][y]));
             }
           } else {
-            // moves.add(new MoveParam(x - recentPos, y, true));
             moves.add(new MoveParam(x, y, recentPos, y, tiles[x][y]));
             tiles[recentPos][y] = currentLevel + 1;
             tiles[x][y] = 0;
@@ -207,7 +199,6 @@ class TileManager {
           if (currentLevel == 0) {
             currentLevel = tiles[x][y];
             if (recentPos != x) {
-              // moves.add(new MoveParam(x - recentPos, y, false));
               moves.add(new MoveParam(x, y, recentPos, y, tiles[x][y]));
               tiles[recentPos][y] = tiles[x][y];
               tiles[x][y] = 0;
@@ -218,7 +209,6 @@ class TileManager {
             currentLevel = tiles[x][y];
             recentPos++;
             if (recentPos != x) {
-              // moves.add(new MoveParam(x - recentPos, y, false));
               moves.add(new MoveParam(x, y, recentPos, y, tiles[x][y]));
               tiles[recentPos][y] = tiles[x][y];
               tiles[x][y] = 0;
@@ -226,7 +216,6 @@ class TileManager {
               moves.add(new MoveParam(x, y, x, y, tiles[x][y]));
             }
           } else {
-            // moves.add(new MoveParam(x - recentPos, y, true));
             moves.add(new MoveParam(x, y, recentPos, y, tiles[x][y]));
             tiles[recentPos][y] = currentLevel + 1;
             tiles[x][y] = 0;

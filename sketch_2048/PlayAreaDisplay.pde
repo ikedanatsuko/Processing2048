@@ -1,5 +1,4 @@
 class PlayAreaDisplay {
-  // MoveMethod[][] moves = new MoveMethod[TILE_SIZE][TILE_SIZE];
 
   PlayAreaDisplay() {
   }

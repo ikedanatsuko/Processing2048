@@ -20,11 +20,6 @@ class MoveParam {
     goalX = boxWidth * (boxGoalX + 0.5);
     goalY = boxHeight * (boxGoalY + 0.5);
 
-    // if (boxX == boxGoalX && boxY == boxGoalY) {
-    //   move == false;
-    // } else {
-    //   move == true;
-    // }
     move = (boxX == boxGoalX && boxY == boxGoalY ? false : true);
   }
 

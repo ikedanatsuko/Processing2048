@@ -6,7 +6,6 @@ class MoveAnimation {
 
   MoveAnimation(ArrayList<MoveParam> movesIn) {
     if (movesIn.size() > 0) {
-      // moves = new ArrayList(movesIn.size());
       moves = new ArrayList();
       for (MoveParam param : movesIn) {
         moves.add(param);
