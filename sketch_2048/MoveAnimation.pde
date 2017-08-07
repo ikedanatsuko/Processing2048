@@ -4,11 +4,11 @@ class MoveAnimation {
   MoveAnimation() {
   }
 
-  MoveAnimation(ArrayList<MoveParam> movesIn) {
-    if (movesIn.size() > 0) {
-      moves = new ArrayList();
-      for (MoveParam param : movesIn) {
-        moves.add(param);
+  MoveAnimation(ArrayList<MoveParam> moves) {
+    if (moves.size() > 0) {
+      this.moves = new ArrayList();
+      for (MoveParam param : moves) {
+        this.moves.add(param);
       }
       phase = Phase.pMove;
     }

@@ -8,8 +8,8 @@ class MoveParam {
   MoveParam() {
   }
 
-  MoveParam(int boxX, int boxY, int boxGoalX, int boxGoalY, int levelIn) {
-    level = levelIn;
+  MoveParam(int boxX, int boxY, int boxGoalX, int boxGoalY, int level) {
+    this.level = level;
     // Get speed
     speedX = (boxGoalX - boxX) * boxWidth / MOVE_TIME;
     speedY = (boxGoalY - boxY) * boxHeight / MOVE_TIME;
