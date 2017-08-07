@@ -1,21 +1,19 @@
 class PlayArea {
   float areaWidth, areaHeight;
   TileManager tileManager;
-  PlayAreaDisplay playAreaDisplay;
+  PlayAreaDisplay playAreaDisplay = new PlayAreaDisplay();
   MoveAnimation moveAnimation = new MoveAnimation();
 
   PlayArea(int tileSize) {
     areaWidth = width;
     areaHeight = height;
     tileManager = new TileManager(tileSize);
-    playAreaDisplay = new PlayAreaDisplay();
   }
 
   PlayArea(int tileSize, float areaWidth, float areaHeight) {
     this.areaWidth = areaWidth;
     this.areaHeight = areaHeight;
     tileManager = new TileManager(tileSize);
-    playAreaDisplay = new PlayAreaDisplay();
   }
 
   void display() {
