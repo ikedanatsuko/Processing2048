@@ -1,17 +1,27 @@
 class MoveAnimation {
-  int moveTime = 10;
+  ArrayList<MoveParam> moves = new ArrayList();
 
-  // movesが含む情報・・・それぞれのタイルの
-  // 移動距離x、移動距離y、レベルアップするか
-  MoveAnimation(int[][] tiles, int[][] moves) {
-    // Get ready to move if a constructer is generated
-    init();
-    phase = Phase.pMove;
+  MoveAnimation() {
   }
 
-  void init() {
-
+  MoveAnimation(ArrayList<MoveParam> movesIn) {
+    if (movesIn.size() > 0) {
+      // moves = new ArrayList(movesIn.size());
+      moves = new ArrayList();
+      for (MoveParam param : movesIn) {
+        moves.add(param);
+      }
+      phase = Phase.pMove;
+    }
   }
 
-
+  void display() {
+    if (moves != null) {
+      playArea.displayBg();
+      for (MoveParam param : moves) {
+        param.move();
+        param.display();
+      }
+    }
+  }
 }

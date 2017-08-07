@@ -5,7 +5,7 @@ class PlayAreaDisplay {
   }
 
   // Draw static tiles
-  void draw_tiles(int[][] tiles) {
+  void tiles(int[][] tiles) {
     PImage img;
     imageMode(CENTER);
     for (int y = 0; y < TILE_SIZE; y++) {
@@ -18,7 +18,7 @@ class PlayAreaDisplay {
   }
 
   // Draw the base of the play area
-  void draw_bg() {
+  void bg() {
     background(0);
     stroke(-1);
     float pos;

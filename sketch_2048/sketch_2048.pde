@@ -1,10 +1,10 @@
 // あとアニメーションつけたらプレイエリアは完成
-// 実行：command + alt + b
+// 実行：control + alt + b
 
 final int TILE_SIZE = 4;
 final float TILE_SCALE = 0.8;
 final int LEVEL_SIZE = 6;
-final int MOVE_TIME = 10; // Time required for movement
+final int MOVE_TIME = 10; // Size of frame required for movement
 
 Phase phase = Phase.pStatic; // Initial state
 
@@ -12,7 +12,7 @@ float boxWidth, boxHeight;
 PImage[] tileImage;
 
 PlayArea playArea;
-MoveAnimation moveAnimation;
+MoveAnimation moveAnimation = new MoveAnimation();
 
 void setup() {
   tileImage = new PImage[] {
@@ -28,7 +28,7 @@ void setup() {
   boxWidth = width / TILE_SIZE;
   boxHeight = height / TILE_SIZE;
   playArea = new PlayArea(TILE_SIZE, width, height);
-  playArea.init();
+  // playArea.init();
 }
 
 void draw() {
@@ -37,7 +37,8 @@ void draw() {
       playArea.display();
       break;
     case pMove:
-    // Move!!!!!!!
+      moveAnimation.display();
+      break;
   }
 }
 

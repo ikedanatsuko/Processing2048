@@ -1,20 +1,18 @@
 // Control tiles
 class TileManager {
-  // MoveParam[] moves = {};
   int[][] tiles;
-  int tileSize
+  int tileSize;
+  // MoveParam[][] moves;
+  ArrayList<MoveParam> moves = new ArrayList();
 
   TileManager(int tileSize) {
     this.tileSize = tileSize;
     tiles = new int[tileSize][tileSize];
-  }
-
-  int[][] getTiles() {
-    return tiles;
+    init_tiles();
   }
 
   void init_tiles() {
-    int[][] tiles = new int[tileSize][tileSize];
+    tiles = new int[tileSize][tileSize];
     for (int y = 0; y < tileSize; y++) {
       for (int x = 0; x < tileSize; x++) {
         tiles[x][y] = 0;
@@ -24,7 +22,7 @@ class TileManager {
   }
 
   void set_new_tile(int[][] tiles) {
-    ArrayList<PVector> emptyTiles = new ArrayList<PVector>();
+    ArrayList<PVector> emptyTiles = new ArrayList();
     for (int y = 0; y < tileSize; y++) {
       for (int x = 0; x < tileSize; x++) {
         if (tiles[x][y] == 0) {
@@ -38,12 +36,13 @@ class TileManager {
 
   // ------------------------------------ Move tiles and return moves
   // Up
-  void move_tiles_u() { // movesも返すようにする
-    int currentLevel, currentPos;
+  ArrayList<MoveParam> move_tiles_u() {
+    moves = new ArrayList();
+    int currentLevel, recentPos;
 
     for (int x = 0; x < tileSize; x++) {
       currentLevel = 0;
-      currentPos = 0;
+      recentPos = 0;
 
       int y = 0;
       while (y < tileSize) {
@@ -52,79 +51,103 @@ class TileManager {
           // When a tile appears in the line for the first time
           if (currentLevel == 0) {
             currentLevel = tiles[x][y];
-            if (currentPos != y) {
-
-              tiles[x][currentPos] = tiles[x][y];
+            if (recentPos != y) {
+              // moves.add(new MoveParam(0, y - recentPos, false));
+              moves.add(new MoveParam(x, y, x, recentPos, tiles[x][y]));
+              tiles[x][recentPos] = tiles[x][y];
               tiles[x][y] = 0;
+            } else {
+              moves.add(new MoveParam(x, y, x, y, tiles[x][y]));
             }
           }
           // When a tile unlike the tile which observed appears recently
           else if (currentLevel != tiles[x][y]) {
             currentLevel = tiles[x][y];
-            currentPos++;
-            if (currentPos != y) {
-              tiles[x][currentPos] = tiles[x][y];
+            recentPos++;
+            if (recentPos != y) {
+              // moves.add(new MoveParam(0, y - recentPos, false));
+              moves.add(new MoveParam(x, y, x, recentPos, tiles[x][y]));
+              tiles[x][recentPos] = tiles[x][y];
               tiles[x][y] = 0;
+            } else {
+              moves.add(new MoveParam(x, y, x, y, tiles[x][y]));
             }
           } else {
             // When a tile same as the tile which observed appears recently
-            tiles[x][currentPos] = currentLevel + 1;
+            // moves.add(new MoveParam(0, y - recentPos, true));
+            moves.add(new MoveParam(x, y, x, recentPos, tiles[x][y]));
+            tiles[x][recentPos] = currentLevel + 1;
             tiles[x][y] = 0;
-            currentPos++;
+            recentPos++;
             currentLevel = 0;
           }
-          y = currentPos;
+          y = recentPos;
         }
         y++;
       }
     }
     set_new_tile(tiles);
+    return moves;
   }
 
   // Down
-  void move_tiles_d() {
-    int currentLevel, currentPos;
+  ArrayList<MoveParam> move_tiles_d() {
+    moves = new ArrayList();
+    int currentLevel, recentPos;
+
     for (int x = 0; x < tileSize; x++) {
       currentLevel = 0;
-      currentPos = tileSize - 1;
+      recentPos = tileSize - 1;
 
       int y = tileSize - 1;
       while (y >= 0) {
-
         if (tiles[x][y] != 0) {
           if (currentLevel == 0) {
             currentLevel = tiles[x][y];
-            if (currentPos != y) {
-              tiles[x][currentPos] = tiles[x][y];
+            if (recentPos != y) {
+              // moves.add(new MoveParam(0, y - recentPos, false));
+              moves.add(new MoveParam(x, y, x, recentPos, tiles[x][y]));
+              tiles[x][recentPos] = tiles[x][y];
               tiles[x][y] = 0;
+            } else {
+              moves.add(new MoveParam(x, y, x, y, tiles[x][y]));
             }
           } else if (currentLevel != tiles[x][y]) {
             currentLevel = tiles[x][y];
-            currentPos--;
-            if (currentPos != y) {
-              tiles[x][currentPos] = tiles[x][y];
+            recentPos--;
+            if (recentPos != y) {
+              // moves.add(new MoveParam(0, y - recentPos, false));
+              moves.add(new MoveParam(x, y, x, recentPos, tiles[x][y]));
+              tiles[x][recentPos] = tiles[x][y];
               tiles[x][y] = 0;
+            } else {
+              moves.add(new MoveParam(x, y, x, y, tiles[x][y]));
             }
           } else {
-            tiles[x][currentPos] = currentLevel + 1;
+            // moves.add(new MoveParam(0, y - recentPos, true));
+            moves.add(new MoveParam(x, y, x, recentPos, tiles[x][y]));
+            tiles[x][recentPos] = currentLevel + 1;
             tiles[x][y] = 0;
-            currentPos--;
+            recentPos--;
             currentLevel = 0;
           }
-          y = currentPos;
+          y = recentPos;
         }
         y--;
       }
     }
     set_new_tile(tiles);
+    return moves;
   }
 
   // Right
-  void move_tiles_r() {
-    int currentLevel, currentPos;
+  ArrayList<MoveParam> move_tiles_r() {
+    moves = new ArrayList();
+    int currentLevel, recentPos;
+
     for (int y = 0; y < tileSize; y++) {
       currentLevel = 0;
-      currentPos = tileSize - 1;
+      recentPos = tileSize - 1;
 
       int x = tileSize - 1;
       while (x >= 0) {
@@ -132,37 +155,50 @@ class TileManager {
         if (tiles[x][y] != 0) {
           if (currentLevel == 0) {
             currentLevel = tiles[x][y];
-            if (currentPos != x) {
-              tiles[currentPos][y] = tiles[x][y];
+            if (recentPos != x) {
+              // moves.add(new MoveParam(x - recentPos, y, false));
+              moves.add(new MoveParam(x, y, recentPos, y, tiles[x][y]));
+              tiles[recentPos][y] = tiles[x][y];
               tiles[x][y] = 0;
+            } else {
+              moves.add(new MoveParam(x, y, x, y, tiles[x][y]));
             }
           } else if (currentLevel != tiles[x][y]) {
             currentLevel = tiles[x][y];
-            currentPos--;
-            if (currentPos != x) {
-              tiles[currentPos][y] = tiles[x][y];
+            recentPos--;
+            if (recentPos != x) {
+              // moves.add(new MoveParam(x - recentPos, y, false));
+              moves.add(new MoveParam(x, y, recentPos, y, tiles[x][y]));
+              tiles[recentPos][y] = tiles[x][y];
               tiles[x][y] = 0;
+            } else {
+              moves.add(new MoveParam(x, y, x, y, tiles[x][y]));
             }
           } else {
-            tiles[currentPos][y] = currentLevel + 1;
+            // moves.add(new MoveParam(x - recentPos, y, true));
+            moves.add(new MoveParam(x, y, recentPos, y, tiles[x][y]));
+            tiles[recentPos][y] = currentLevel + 1;
             tiles[x][y] = 0;
-            currentPos--;
+            recentPos--;
             currentLevel = 0;
           }
-          x = currentPos;
+          x = recentPos;
         }
         x--;
       }
     }
     set_new_tile(tiles);
+    return moves;
   }
 
   // Left
-  void move_tiles_l() {
-    int currentLevel, currentPos;
+  ArrayList<MoveParam> move_tiles_l() {
+    moves = new ArrayList();
+    int currentLevel, recentPos;
+
     for (int y = 0; y < tileSize; y++) {
       currentLevel = 0;
-      currentPos = 0;
+      recentPos = 0;
 
       int x = 0;
       while (x < tileSize) {
@@ -170,29 +206,39 @@ class TileManager {
         if (tiles[x][y] != 0) {
           if (currentLevel == 0) {
             currentLevel = tiles[x][y];
-            if (currentPos != x) {
-              tiles[currentPos][y] = tiles[x][y];
+            if (recentPos != x) {
+              // moves.add(new MoveParam(x - recentPos, y, false));
+              moves.add(new MoveParam(x, y, recentPos, y, tiles[x][y]));
+              tiles[recentPos][y] = tiles[x][y];
               tiles[x][y] = 0;
+            } else {
+              moves.add(new MoveParam(x, y, x, y, tiles[x][y]));
             }
           } else if (currentLevel != tiles[x][y]) {
             currentLevel = tiles[x][y];
-            currentPos++;
-            if (currentPos != x) {
-              tiles[currentPos][y] = tiles[x][y];
+            recentPos++;
+            if (recentPos != x) {
+              // moves.add(new MoveParam(x - recentPos, y, false));
+              moves.add(new MoveParam(x, y, recentPos, y, tiles[x][y]));
+              tiles[recentPos][y] = tiles[x][y];
               tiles[x][y] = 0;
+            } else {
+              moves.add(new MoveParam(x, y, x, y, tiles[x][y]));
             }
           } else {
-            // Level up
-            tiles[currentPos][y] = currentLevel + 1;
+            // moves.add(new MoveParam(x - recentPos, y, true));
+            moves.add(new MoveParam(x, y, recentPos, y, tiles[x][y]));
+            tiles[recentPos][y] = currentLevel + 1;
             tiles[x][y] = 0;
-            currentPos++;
+            recentPos++;
             currentLevel = 0;
           }
-          x = currentPos;
+          x = recentPos;
         }
         x++;
       }
     }
     set_new_tile(tiles);
+    return moves;
   }
 }
