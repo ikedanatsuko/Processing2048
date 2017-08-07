@@ -16,7 +16,6 @@ class MoveAnimation {
 
   void display() {
     if (moves != null) {
-      playArea.displayBg();
       for (MoveParam param : moves) {
         param.move();
         param.display();

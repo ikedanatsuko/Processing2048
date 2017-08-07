@@ -2,6 +2,7 @@ class PlayArea {
   float areaWidth, areaHeight;
   TileManager tileManager;
   PlayAreaDisplay playAreaDisplay;
+  MoveAnimation moveAnimation = new MoveAnimation();
 
   PlayArea(int tileSize) {
     areaWidth = width;
@@ -18,12 +19,16 @@ class PlayArea {
   }
 
   void display() {
-    playAreaDisplay.bg();
-    playAreaDisplay.tiles(tileManager.tiles);
-  }
-
-  void displayBg() {
-    playAreaDisplay.bg();
+    switch (phase) {
+      case pStatic:
+        playAreaDisplay.bg();
+        playAreaDisplay.tiles(tileManager.tiles);
+        break;
+      case pMove:
+        playAreaDisplay.bg();
+        moveAnimation.display();
+        break;
+    }
   }
 
   // Change tile position

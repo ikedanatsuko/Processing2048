@@ -12,7 +12,6 @@ float boxWidth, boxHeight;
 PImage[] tileImage;
 
 PlayArea playArea;
-MoveAnimation moveAnimation = new MoveAnimation();
 
 void setup() {
   tileImage = new PImage[] {
@@ -31,14 +30,7 @@ void setup() {
 }
 
 void draw() {
-  switch (phase) {
-    case pStatic:
-      playArea.display();
-      break;
-    case pMove:
-      moveAnimation.display();
-      break;
-  }
+  playArea.display();
 }
 
 void keyPressed() {
