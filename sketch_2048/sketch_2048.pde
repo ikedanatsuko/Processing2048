@@ -1,6 +1,3 @@
-// あとアニメーションつけたらプレイエリアは完成
-// 実行：control + alt + b
-
 final int TILE_SIZE = 4;
 final float TILE_SCALE = 0.8;
 final int LEVEL_SIZE = 6;
