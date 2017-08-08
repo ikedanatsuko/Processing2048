@@ -17,10 +17,10 @@ class TileManager {
         tiles[x][y] = 0;
       }
     }
-    set_new_tile(tiles);
+    set_new_tile();
   }
 
-  void set_new_tile(int[][] tiles) {
+  void set_new_tile() {
     ArrayList<PVector> emptyTiles = new ArrayList();
     for (int y = 0; y < tileSize; y++) {
       for (int x = 0; x < tileSize; x++) {
@@ -70,7 +70,7 @@ class TileManager {
         y++;
       }
     }
-    set_new_tile(tiles);
+    set_new_tile();
     return moves;
   }
 
@@ -105,7 +105,7 @@ class TileManager {
         y--;
       }
     }
-    set_new_tile(tiles);
+    set_new_tile();
     return moves;
   }
 
@@ -141,7 +141,7 @@ class TileManager {
         x--;
       }
     }
-    set_new_tile(tiles);
+    set_new_tile();
     return moves;
   }
 
@@ -177,7 +177,7 @@ class TileManager {
         x++;
       }
     }
-    set_new_tile(tiles);
+    set_new_tile();
     return moves;
   }
 
